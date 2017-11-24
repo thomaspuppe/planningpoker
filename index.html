@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Planning Poker</title>
+    <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<ul class="container">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>5</li>
+    <li>8</li>
+    <li>13</li>
+    <li>21</li>
+    <li>&infin;</li>
+</ul>
+
+<script>
+var allCards = document.querySelectorAll('.container li');
+
+function touchCard(event) {
+    var e = event || window.event;
+    var element = e.target || e.srcElement;
+
+    if (element.classList.contains('focused')) {
+        element.classList.add('highlighted');
+        element.classList.remove('focused');
+    } else if (element.classList.contains('highlighted')) {
+        element.classList.remove('highlighted');
+    } else {
+        element.classList.add('focused');
+    }
+}
+
+allCards.forEach(function(elem) {
+    elem.addEventListener('click', touchCard, true);
+});
+</script>
+
+</body>
+</html>
