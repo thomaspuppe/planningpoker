@@ -5,6 +5,7 @@
     <title>Planning Poker</title>
     <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="shake.js"></script>
 </head>
 <body>
 
@@ -23,23 +24,39 @@
 <script>
 var allCards = document.querySelectorAll('.container li');
 
+function revealFocusedCard() {
+    var card = document.querySelector('.container li.focused');
+    card.classList.add('highlighted');
+    card.classList.remove('focused');
+    myShakeEvent.stop();
+}
+
 function touchCard(event) {
     var e = event || window.event;
     var element = e.target || e.srcElement;
 
     if (element.classList.contains('focused')) {
-        element.classList.add('highlighted');
-        element.classList.remove('focused');
+        revealFocusedCard();
     } else if (element.classList.contains('highlighted')) {
         element.classList.remove('highlighted');
     } else {
         element.classList.add('focused');
+        myShakeEvent.start();
     }
 }
 
 allCards.forEach(function(elem) {
     elem.addEventListener('click', touchCard, true);
 });
+
+/* ========================================= */
+
+var myShakeEvent = new Shake({
+    threshold: 10
+});
+
+window.addEventListener('shake', revealFocusedCard, false);
+
 </script>
 
 </body>
