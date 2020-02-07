@@ -29,6 +29,7 @@
     <li>&infin;</li>
 </ul>
 
+<script src="shake.js"></script>
 <script>
 var allCards = document.querySelectorAll('.container li');
 
@@ -59,15 +60,19 @@ allCards.forEach(function(elem) {
 
 /* ========================================= */
 
-
-</script>
-<script src="shake.js"></script>
-<script>
 var myShakeEvent = new Shake({
     threshold: 10
 });
 
 window.addEventListener('shake', revealFocusedCard, false);
+
+/* ========================================= */
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js', {
+    scope: '/'
+  });
+}
 </script>
 
 </body>
